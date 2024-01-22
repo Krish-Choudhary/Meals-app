@@ -7,17 +7,21 @@ class MealItem extends StatelessWidget {
   const MealItem({
     super.key,
     required this.meal,
+    required this.onselectMeal,
   });
   final Meal meal;
+  final void Function(Meal meal) onselectMeal;
 
   String get complexityText {
     return meal.complexity.name[0].toUpperCase() +
-        meal.complexity.name.substring(1);          // If string = "hello" it will return "Hello"
+        meal.complexity.name
+            .substring(1); // If string = "hello" it will return "Hello"
   }
 
   String get affordabilityText {
     return meal.affordability.name[0].toUpperCase() +
-        meal.affordability.name.substring(1);          // If string = "hello" it will return "Hello"
+        meal.affordability.name
+            .substring(1); // If string = "hello" it will return "Hello"
   }
 
   @override
@@ -31,7 +35,9 @@ class MealItem extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       elevation: 2,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          onselectMeal(meal);
+        },
         child: Stack(
           children: [
             FadeInImage(
@@ -79,7 +85,8 @@ class MealItem extends StatelessWidget {
                         const SizedBox(width: 12),
                         MealItemTrait(icon: Icons.work, label: complexityText),
                         const SizedBox(width: 12),
-                        MealItemTrait(icon: Icons.attach_money, label: affordabilityText),
+                        MealItemTrait(
+                            icon: Icons.attach_money, label: affordabilityText),
                       ],
                     )
                   ],
