@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:meals/data/dummy_data.dart';
 // import 'package:meals/models/meal.dart';
 import 'package:meals/providers/favorites_provider.dart';
-import 'package:meals/providers/meals_provider.dart';
+// import 'package:meals/providers/meals_provider.dart';
 import 'package:meals/screens/categories.dart';
 import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/meals.dart';
@@ -70,28 +70,29 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final meals = ref.watch(mealsProvider);
-    final activeFilters = ref.watch(filtersProvider);
-    final availableMeals = meals.where((meal) {
-      if (activeFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
-        // filter is set to gluten free and the meal is not gluten free
-        return false;
-      }
-      if (activeFilters[Filter.vegetarian]! && !meal.isVegetarian) {
-        // filter is set to vegetarian and the meal is not vegetarian
-        return false;
-      }
-      if (activeFilters[Filter.vegan]! && !meal.isVegan) {
-        // filter is set to vegan and the meal is not vegan
-        return false;
-      }
-      if (activeFilters[Filter.lactoseFree]! && !meal.isLactoseFree) {
-        // filter is set to lactose free and the meal is not lactose free
-        return false;
-      }
-      //else
-      return true;
-    }).toList();
+    // final meals = ref.watch(mealsProvider);
+    // final activeFilters = ref.watch(filtersProvider);
+    final availableMeals = ref.watch(filteredMealsProvider);
+    // meals.where((meal) {
+    //   if (activeFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
+    //     // filter is set to gluten free and the meal is not gluten free
+    //     return false;
+    //   }
+    //   if (activeFilters[Filter.vegetarian]! && !meal.isVegetarian) {
+    //     // filter is set to vegetarian and the meal is not vegetarian
+    //     return false;
+    //   }
+    //   if (activeFilters[Filter.vegan]! && !meal.isVegan) {
+    //     // filter is set to vegan and the meal is not vegan
+    //     return false;
+    //   }
+    //   if (activeFilters[Filter.lactoseFree]! && !meal.isLactoseFree) {
+    //     // filter is set to lactose free and the meal is not lactose free
+    //     return false;
+    //   }
+    //   //else
+    //   return true;
+    // }).toList();
     Widget activePage = CategoriesScreen(
       availableMeals: availableMeals,
       // onToggleFavorite: _toggleMealFavoriteStatus,
